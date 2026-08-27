@@ -1394,18 +1394,6 @@ function renderPreview(){
   const priceLabel = $("#draftSelectionPrice");
   if(priceLabel) priceLabel.textContent = fmtPrice(draft.sellPrice);
 
-  // 選択された魚種と数量・希望売価を表示
-  const fish = FISH_DATA[draft.fishType];
-  const fishName = fish ? fish.name : "";
-  const iconHost = $("#draftSelectionIcon");
-  if(iconHost) iconHost.innerHTML = fishIconSVG("#1a3a55");
-  const fishLabel = $("#draftSelectionFish");
-  if(fishLabel) fishLabel.textContent = "魚種: " + fishName;
-  const qtyLabel = $("#draftSelectionQty");
-  if(qtyLabel) qtyLabel.textContent = draft.qty;
-  const priceLabel = $("#draftSelectionPrice");
-  if(priceLabel) priceLabel.textContent = fmtPrice(draft.sellPrice);
-
   const commentInput = $("#commentInput");
   commentInput.value = draft.ownerComment;
   commentInput.oninput = ()=>{
