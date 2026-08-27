@@ -38,38 +38,29 @@
   /* ---------- Header ---------- */
   header.topbar{
     position:sticky;top:0;z-index:50;
-    background:linear-gradient(135deg,var(--indigo-900),var(--indigo-800) 60%,var(--indigo-700));
-    color:var(--white);
+    background:linear-gradient(180deg,var(--white),var(--paper));
+    color:var(--indigo-900);
     padding:14px 20px;
-    box-shadow:0 2px 10px rgba(18,36,54,.25);
+    border-bottom:1px solid var(--border);
+    box-shadow:0 1px 6px rgba(18,36,54,.08);
     display:flex;flex-wrap:wrap;align-items:center;gap:18px;
   }
   .brand{
-    font-family:var(--font-serif);
-    font-size:22px;letter-spacing:.06em;font-weight:700;
-    white-space:nowrap;
+    display:flex;align-items:center;
     margin-right:4px;
   }
-  .brand small{display:block;font-family:var(--font-sans);font-size:10px;font-weight:400;letter-spacing:.14em;opacity:.75;}
-  .mode-tabs{display:flex;gap:6px;background:rgba(255,255,255,.08);padding:4px;border-radius:8px;}
+  .brand-logo{height:176px;width:auto;display:block;}
+  .mode-tabs{display:flex;gap:6px;background:var(--indigo-100);padding:4px;border-radius:8px;}
   .mode-tabs button{
-    border:none;background:transparent;color:rgba(255,255,255,.75);
+    border:none;background:transparent;color:var(--muted);
     padding:8px 16px;border-radius:6px;font-size:14px;font-weight:600;letter-spacing:.03em;
     transition:background .15s,color .15s;
   }
-  .mode-tabs button.active{background:var(--white);color:var(--indigo-900);}
-  .time-control{display:flex;align-items:center;gap:10px;flex:1;min-width:220px;}
-  .time-control label{font-size:12px;color:rgba(255,255,255,.8);white-space:nowrap;}
-  .time-control #timeLabel{font-family:var(--font-serif);font-size:17px;font-weight:700;color:#ffd9a8;min-width:52px;display:inline-block;}
+  .mode-tabs button.active{background:var(--indigo-900);color:var(--white);}
+  .time-control{display:flex;align-items:center;gap:10px;order:2;flex-basis:100%;min-width:220px;}
+  .time-control label{font-size:12px;color:var(--muted);white-space:nowrap;}
+  .time-control #timeLabel{font-family:var(--font-serif);font-size:17px;font-weight:700;color:var(--accent);min-width:52px;display:inline-block;}
   .time-control input[type=range]{flex:1;accent-color:var(--accent);min-width:100px;}
-  .ai-toggle{display:flex;flex-direction:column;gap:4px;font-size:12px;color:rgba(255,255,255,.85);}
-  .ai-toggle label{display:flex;align-items:center;gap:6px;white-space:nowrap;}
-  .ai-toggle input[type=password]{
-    margin-top:2px;padding:5px 8px;border-radius:5px;border:1px solid rgba(255,255,255,.3);
-    background:rgba(255,255,255,.1);color:#fff;font-size:12px;width:190px;
-  }
-  .ai-toggle input[type=password]::placeholder{color:rgba(255,255,255,.5);}
-  .ai-note{font-size:10px;color:rgba(255,255,255,.55);}
 
   main{max-width:1100px;margin:0 auto;padding:22px 18px 60px;}
 
@@ -161,7 +152,6 @@
     padding:3px 9px;border-radius:999px;font-weight:600;
   }
   .ai-badge.edited{background:var(--success-bg);color:var(--success);}
-  .fallback-note{font-size:11px;color:var(--danger);margin-left:8px;}
 
   .proposal{border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px;background:#fdfcfa;}
   .proposal-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap;}
@@ -173,13 +163,170 @@
   .prep-checks{display:flex;flex-wrap:wrap;gap:14px;}
   .prep-checks label{font-size:13px;display:flex;align-items:center;gap:6px;color:var(--text);}
 
-  .discount-grid{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end;}
-  .discount-grid .field{max-width:160px;}
-  .discount-stage{font-size:12px;color:var(--muted);margin-bottom:4px;}
+  /* ---------- Discount Schedule Grid ---------- */
+  .schedule-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:14px;
+  }
+  .schedule-card{
+    background:#fbf8f3;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .schedule-stage-title{
+    font-size:13px;
+    font-weight:700;
+    color:var(--indigo-900);
+    border-bottom:1px solid var(--border);
+    padding-bottom:6px;
+  }
+  .schedule-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .schedule-sublabel{
+    font-size:12px;
+    font-weight:600;
+    color:var(--indigo-800);
+    white-space:nowrap;
+  }
+  .time-input-group{
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  .time-num-input{
+    width:56px !important;
+    padding:6px 4px !important;
+    text-align:center;
+    border-radius:6px !important;
+    font-weight:600;
+  }
+  .time-colon{
+    font-weight:700;
+    color:var(--indigo-900);
+    padding:0 2px;
+  }
+  .input-with-unit{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .pct-input{
+    width:64px !important;
+    padding:6px 6px !important;
+    text-align:center;
+    border-radius:6px !important;
+    font-weight:600;
+  }
+  .unit{
+    font-size:12px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+
+  /* ---------- Registered Stock Panel ---------- */
+  .registered-stock-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:12px;
+  }
+  .registered-stock-card{
+    background:#fbf8f3;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 16px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    transition:border-color .15s, background-color .15s;
+  }
+  .registered-stock-name{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:14px;
+    font-weight:700;
+    color:var(--indigo-900);
+  }
+  .registered-stock-name .fish-icon{
+    width:22px;
+    height:16px;
+  }
+  .registered-stock-val{
+    font-family:var(--font-serif);
+    font-size:20px;
+    font-weight:700;
+    color:var(--accent-dark);
+    white-space:nowrap;
+    display:flex;
+    align-items:baseline;
+    gap:3px;
+  }
+  .unit-label{
+    font-size:12px;
+    font-family:var(--font-sans);
+    font-weight:600;
+    color:var(--muted);
+  }
+
+  /* ---------- Publish Row ---------- */
+  .publish-row{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    gap:12px;
+    margin-top:16px;
+    flex-wrap:wrap;
+  }
+  .draft-selection-info{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    background:#fdf1ea;
+    border:1px solid #f0cbb2;
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:14px;
+    color:var(--indigo-900);
+    flex-wrap:wrap;
+  }
+  .draft-fish-item{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:700;
+  }
+  .draft-fish-item .fish-icon{
+    width:22px;
+    height:16px;
+  }
+  .draft-qty-item,
+  .draft-price-item{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    font-weight:600;
+    color:var(--accent-dark);
+  }
+  .draft-qty-num,
+  .draft-price-num{
+    font-family:var(--font-serif);
+    font-size:18px;
+    font-weight:700;
+  }
 
   /* ---------- Waste bar ---------- */
   .waste-bar{
-    position:sticky;top:64px;z-index:40;
+    position:sticky;top:calc(var(--header-h, 150px) + 8px);z-index:40;
     background:var(--indigo-900);color:#fff;
     padding:10px 18px;border-radius:10px;margin-bottom:18px;
     font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;flex-wrap:wrap;
@@ -228,6 +375,159 @@
   .card-footer{margin-top:auto;padding-top:6px;}
   .btn-full{width:100%;}
 
+  /* ---------- Price Variant Boxes ---------- */
+  .price-variants-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:14px;
+    margin-top:8px;
+  }
+  .price-variant-box{
+    background:#fcfbf8;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    padding:14px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .price-variant-box:hover{
+    border-color:var(--indigo-700);
+  }
+  .price-variant-box.sold-out-box{
+    opacity:.6;
+    background:#f4f5f6;
+  }
+  .price-variant-header{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:8px;
+    border-bottom:1px solid var(--border);
+    padding-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .price-variant-price{
+    font-family:var(--font-serif);
+    font-size:22px;
+    font-weight:700;
+    color:var(--accent-dark);
+  }
+  .price-variant-orig{
+    font-size:12px;
+    color:var(--muted);
+    text-decoration:line-through;
+  }
+  .price-variant-tag{
+    font-size:11px;
+    background:var(--danger);
+    color:#fff;
+    padding:2px 6px;
+    border-radius:4px;
+    font-weight:700;
+  }
+
+  /* ---------- Customer Reserve Action Bar ---------- */
+  .customer-reserve-action-bar{
+    margin-top:24px;
+    padding:18px 22px;
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:12px;
+    box-shadow:0 4px 18px rgba(18,36,54,0.06);
+  }
+  .customer-reserve-inner{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .customer-reserve-inner .pickup-field{
+    flex:1;
+    min-width:240px;
+    margin:0;
+  }
+  .customer-reserve-inner .btn{
+    min-width:200px;
+    font-size:16px;
+    padding:12px 28px;
+    font-weight:700;
+  }
+
+  /* ---------- Multi-item modal styles ---------- */
+  .modal-items-list{
+    max-height:220px;
+    overflow-y:auto;
+    margin:12px 0;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .modal-item-row{
+    background:#fcfbf8;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:9px 12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:13.5px;
+    gap:12px;
+  }
+  .modal-item-left{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .modal-item-name{
+    font-weight:700;
+    color:var(--indigo-900);
+  }
+  .modal-item-prep{
+    font-size:12px;
+    color:var(--muted);
+  }
+  .modal-item-right{
+    text-align:right;
+    white-space:nowrap;
+  }
+  .modal-item-qty{
+    font-size:12px;
+    color:var(--muted);
+  }
+  .modal-item-subtotal{
+    font-weight:700;
+    color:var(--accent-dark);
+    font-family:var(--font-serif);
+    font-size:15px;
+  }
+  .modal-done-list{
+    text-align:left;
+    background:#fcfbf8;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 14px;
+    margin:14px 0 18px;
+    max-height:180px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    font-size:13px;
+  }
+  .modal-done-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:4px 0;
+    border-bottom:1px dashed var(--border);
+  }
+  .modal-done-item:last-child{
+    border-bottom:none;
+  }
+
   /* ---------- Modal ---------- */
   .modal-overlay{
     position:fixed;inset:0;background:rgba(18,36,54,.45);z-index:400;
@@ -261,6 +561,13 @@
   .res-time{font-family:var(--font-serif);font-size:18px;font-weight:700;color:var(--indigo-900);min-width:64px;}
   .res-name{font-size:13px;color:var(--text);min-width:70px;}
   .res-fish{font-size:13px;font-weight:700;color:var(--indigo-800);min-width:60px;}
+  .res-price{
+    font-family:var(--font-serif);
+    font-size:15px;
+    font-weight:700;
+    color:var(--accent-dark);
+    min-width:65px;
+  }
   .res-prep{
     font-size:12px;font-weight:700;background:var(--accent);color:#fff;padding:4px 10px;border-radius:999px;
   }
@@ -317,14 +624,188 @@
   }
   .forecast-note strong{color:var(--indigo-700);}
 
+  /* ---------- Sales Summary & Sales Registration ---------- */
+  .sub-title-note{
+    font-size:13px;
+    font-weight:normal;
+    color:var(--muted);
+    margin-left:6px;
+  }
+  .sales-summary-panel{
+    margin-bottom:20px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:16px 20px;
+  }
+  .sales-summary-panel h2{
+    margin:0 0 12px;
+    font-size:16px;
+    font-weight:700;
+    color:var(--indigo-900);
+  }
+  .summary-table-wrap{
+    overflow-x:auto;
+    border:1px solid var(--border);
+    border-radius:8px;
+  }
+  .summary-table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13.5px;
+  }
+  .summary-table th{
+    background:var(--indigo-900);
+    color:#fff;
+    padding:9px 12px;
+    font-weight:600;
+    white-space:nowrap;
+    text-align:right;
+    font-size:12.5px;
+  }
+  .summary-table th:first-child{
+    text-align:left;
+  }
+  .summary-table td{
+    padding:8px 12px;
+    border-bottom:1px solid var(--border);
+    text-align:right;
+    white-space:nowrap;
+    color:var(--indigo-900);
+    font-family:var(--font-sans);
+  }
+  .summary-table td.money{
+    font-family:var(--font-serif);
+    font-weight:600;
+  }
+  .summary-table td:first-child{
+    text-align:left;
+    font-weight:700;
+    font-family:var(--font-sans);
+  }
+  .summary-table tbody tr:nth-child(even){
+    background:#fcfbf8;
+  }
+  .summary-table tbody tr:hover{
+    background:#f5f2eb;
+  }
+  .summary-table tfoot td{
+    background:var(--indigo-100);
+    font-weight:700;
+    border-top:2px solid var(--indigo-800);
+  }
+  .profit-pos{
+    color:var(--success);
+    font-weight:700;
+  }
+  .profit-neg{
+    color:var(--danger);
+    font-weight:700;
+  }
+  .sales-items-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));
+    gap:14px;
+    margin:14px 0 20px;
+  }
+  .sales-item-card{
+    background:#fff;
+    border:1.5px solid var(--border);
+    border-radius:10px;
+    padding:14px 16px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    box-shadow:0 2px 8px rgba(18,36,54,0.03);
+  }
+  .sales-item-card.reservation-card{
+    border-left:4px solid var(--accent);
+    background:#fffdfa;
+  }
+  .sales-item-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .sales-item-fish{
+    font-size:15.5px;
+    font-weight:700;
+    color:var(--indigo-900);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .sales-item-details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:6px 12px;
+    background:#fcfbf8;
+    padding:9px 12px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    font-size:12.5px;
+  }
+  .sales-item-details .item-stat{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+  }
+  .sales-item-details .item-stat span.label{
+    font-size:11px;
+    color:var(--muted);
+  }
+  .sales-item-details .item-stat span.val{
+    font-weight:700;
+    color:var(--indigo-900);
+  }
+  .sales-item-details .item-stat span.val.highlight{
+    color:var(--accent-dark);
+  }
+  .sales-item-input-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding-top:4px;
+  }
+  .sales-item-input-row label{
+    font-size:13px;
+    font-weight:700;
+    color:var(--indigo-900);
+    margin:0;
+  }
+  .sales-input-group{
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .sales-qty-input{
+    width:80px;
+    padding:6px 8px;
+    border:1.5px solid var(--border);
+    border-radius:6px;
+    font-size:15px;
+    font-weight:700;
+    text-align:right;
+    font-family:var(--font-sans);
+  }
+  .sales-qty-input:focus{
+    border-color:var(--accent);
+    outline:none;
+  }
+  .sales-action-row{
+    text-align:center;
+    margin-top:12px;
+  }
+
   @media (min-width:700px){
     .pricing-grid{grid-template-columns:repeat(3,1fr);}
   }
 
   @media (max-width:600px){
     header.topbar{padding:12px 14px;gap:10px;}
-    .brand{font-size:19px;}
-    .waste-bar{top:96px;font-size:13px;}
+    .brand-logo{height:128px;}
+    .waste-bar{font-size:13px;}
     .modal-box{padding:20px;}
     .res-num{margin-left:0;}
   }
@@ -333,7 +814,7 @@
 <body>
 
 <header class="topbar">
-  <div class="brand">今日の魚太郎<small>SHOTENGAI FISH STAND</small></div>
+  <div class="brand"><img class="brand-logo" src="data:image/png;base64,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" alt="今日の魚太郎"></div>
   <nav class="mode-tabs">
     <button type="button" data-mode="owner" class="tab active">店主モード</button>
     <button type="button" data-mode="customer" class="tab">客モード</button>
@@ -343,11 +824,6 @@
     <span id="timeLabel">15:00</span>
     <input type="range" id="timeSlider" min="900" max="1200" step="5" value="900">
   </div>
-  <div class="ai-toggle">
-    <label><input type="checkbox" id="liveModeToggle"> ライブモード（Anthropic API接続）</label>
-    <input type="password" id="apiKeyInput" placeholder="APIキーを入力（sk-ant-...）" style="display:none">
-    <span class="ai-note" id="aiModeNote">デモモード：あらかじめ用意した文章から生成演出をします</span>
-  </div>
 </header>
 
 <main>
@@ -356,6 +832,7 @@
     <div class="owner-subtabs">
       <button type="button" class="subtab active" data-sub="register">入荷登録</button>
       <button type="button" class="subtab" data-sub="reservations">予約一覧 <span id="resBadge" class="badge" hidden>0</span></button>
+      <button type="button" class="subtab" data-sub="sales">売上登録</button>
     </div>
 
     <!-- 入荷登録 -->
@@ -394,7 +871,6 @@
         <h2>生成された品書き</h2>
         <div style="margin-bottom:10px;">
           <span class="ai-badge" id="aiBadge">魚太郎AIが下書きしました</span>
-          <span class="fallback-note" id="fallbackNote" hidden></span>
         </div>
 
         <div class="field">
@@ -420,18 +896,57 @@
           </div>
 
           <div id="scheduleSettings">
-            <div class="discount-grid">
-              <div class="field">
-                <div class="discount-stage">定価（15:00〜17:59）</div>
-                <input type="text" value="100%" disabled>
+            <div class="schedule-grid">
+              <!-- 段階1: 定価 -->
+              <div class="schedule-card">
+                <div class="schedule-stage-title" id="stage1Label">定価期間（15:00〜17:59）</div>
+                <div class="schedule-row">
+                  <span class="schedule-sublabel">販売価格</span>
+                  <div class="input-with-unit">
+                    <input type="text" value="100" disabled class="pct-input">
+                    <span class="unit">%（定価）</span>
+                  </div>
+                </div>
               </div>
-              <div class="field">
-                <div class="discount-stage">18時以降</div>
-                <input type="number" id="eveningPct" min="0" max="90" value="20">%
+
+              <!-- 段階2: 値引き開始時刻 & 割引率 -->
+              <div class="schedule-card">
+                <div class="schedule-stage-title" id="stage2Label">値引き開始</div>
+                <div class="schedule-row">
+                  <label class="schedule-sublabel">値引き開始時刻</label>
+                  <div class="time-input-group">
+                    <input type="number" id="eveningHour" min="0" max="23" value="18" class="time-num-input" aria-label="値引き開始時">
+                    <span class="time-colon">:</span>
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" id="eveningMin" value="00" class="time-num-input" aria-label="値引き開始分">
+                  </div>
+                </div>
+                <div class="schedule-row">
+                  <label class="schedule-sublabel">割引率</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="eveningPct" min="0" max="90" value="20" class="pct-input">
+                    <span class="unit">% 引き</span>
+                  </div>
+                </div>
               </div>
-              <div class="field">
-                <div class="discount-stage">閉店1時間前（19時〜）</div>
-                <input type="number" id="closingPct" min="0" max="90" value="40">%
+
+              <!-- 段階3: 閉店直前セール開始時刻 & 割引率 -->
+              <div class="schedule-card">
+                <div class="schedule-stage-title" id="stage3Label">閉店直前セール</div>
+                <div class="schedule-row">
+                  <label class="schedule-sublabel">閉店直前セール開始時刻</label>
+                  <div class="time-input-group">
+                    <input type="number" id="closingHour" min="0" max="23" value="19" class="time-num-input" aria-label="閉店直前セール時">
+                    <span class="time-colon">:</span>
+                    <input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="2" id="closingMin" value="00" class="time-num-input" aria-label="閉店直前セール分">
+                  </div>
+                </div>
+                <div class="schedule-row">
+                  <label class="schedule-sublabel">割引率</label>
+                  <div class="input-with-unit">
+                    <input type="number" id="closingPct" min="0" max="90" value="40" class="pct-input">
+                    <span class="unit">% 引き</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -463,14 +978,69 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-primary" id="publishBtn">公開する</button>
+        <div class="publish-row">
+          <div class="draft-selection-info" id="draftSelectionInfo">
+            <span class="draft-fish-item">
+              <span id="draftSelectionIcon"></span>
+              <span id="draftSelectionFish">魚種: -</span>
+            </span>
+            <span class="draft-qty-item">
+              <span>数量:</span>
+              <span class="draft-qty-num" id="draftSelectionQty">0</span>
+              <span>尾</span>
+            </span>
+            <span class="draft-price-item">
+              <span>希望売価:</span>
+              <span class="draft-price-num" id="draftSelectionPrice">0</span>
+              <span>円/尾</span>
+            </span>
+          </div>
+          <button type="button" class="btn btn-primary" id="publishBtn">公開する</button>
+        </div>
+      </div>
+
+      <!-- 魚種ごとの入荷登録数量 -->
+      <div class="panel" id="registeredStockPanel">
+        <h2>魚種ごとの入荷登録数量</h2>
+        <div class="registered-stock-grid" id="registeredStockList"></div>
       </div>
     </div>
 
     <!-- 予約一覧 -->
     <div id="reservationsPanel" class="panel" hidden>
-      <h2>予約一覧（受け取り時刻順）</h2>
+      <h2>予約一覧（受け取り時刻順）<span class="sub-title-note">※金額は希望売価(円/尾)</span></h2>
       <div id="reservationsList"></div>
+    </div>
+
+    <!-- 売上登録 -->
+    <div id="salesPanel" class="panel" hidden>
+      <!-- 売上状況サマリー表 -->
+      <div class="sales-summary-panel" id="salesSummaryPanel" style="margin-bottom:28px;">
+        <h2>売上状況</h2>
+        <div class="summary-table-wrap">
+          <table class="summary-table" id="salesSummaryTable">
+            <thead>
+              <tr>
+                <th>魚種</th>
+                <th>入荷登録数量</th>
+                <th>売上数量</th>
+                <th>売上高</th>
+                <th>仕入価格合計</th>
+                <th>粗利</th>
+              </tr>
+            </thead>
+            <tbody id="salesSummaryTbody"></tbody>
+            <tfoot id="salesSummaryTfoot"></tfoot>
+          </table>
+        </div>
+      </div>
+
+      <h2 style="margin-top:8px;">売上登録</h2>
+      <div id="salesListingsEmpty" class="empty-note" hidden>公開された魚がありません。まずは「入荷登録」から魚を公開してください。</div>
+      <div id="salesListingsGrid" class="sales-items-grid"></div>
+      <div class="sales-action-row" id="salesActionRow">
+        <button type="button" class="btn btn-primary" id="recordSalesBtn" style="min-width:200px; font-size:15px; padding:10px 24px;">売上を登録する</button>
+      </div>
     </div>
   </section>
 
@@ -482,6 +1052,15 @@
       予約により <span class="num current" id="wasteCurrentNum">0</span>点に減少
     </div>
     <div class="listings-grid" id="listingsGrid"></div>
+    <div class="customer-reserve-action-bar" id="customerReserveActionBar">
+      <div class="customer-reserve-inner">
+        <div class="field pickup-field">
+          <label for="bulkPickupSelect"><strong>受け取り希望時間</strong></label>
+          <select id="bulkPickupSelect" class="input"></select>
+        </div>
+        <button type="button" class="btn btn-primary" id="bulkReserveBtn">取り置きする</button>
+      </div>
+    </div>
   </section>
 </main>
 
@@ -551,8 +1130,8 @@ const FISH_ORDER = ["aji","saba","kamasu","isaki","surumeika"];
 const LOADING_MESSAGES = ["目利き中…","魚太郎が考えています…","今朝の水揚げを確認中…"];
 const CUSTOMER_NAMES = ["田中様","佐藤様","鈴木様","高橋様","伊藤様","渡辺様","山本様","中村様","小林様","加藤様"];
 
-const EVENING_TIME=1080;  // 18:00
-const CLOSING_HOUR_TIME=1140; // 19:00 (closing 1h before)
+const DEFAULT_EVENING_TIME=1080;  // 18:00
+const DEFAULT_CLOSING_TIME=1140; // 19:00 (closing 1h before)
 const CLOSE_TIME=1200; // 20:00
 const OPEN_TIME=900; // 15:00
 const PRICE_STEP=10; // 価格の丸め単位（円）
@@ -563,15 +1142,27 @@ const DEFAULT_PRICING = { mode:"schedule", maxDiscountPct:40, stockSensitivity:5
    ========================================================= */
 let state = {
   currentTime: 900,
-  aiMode: "demo",
-  apiKey: "",
   mode: "owner",
   ownerSub: "register",
   listings: [],
   reservations: [],
   reservationSeq: 1,
   listingSeq: 1,
-  wasteBase: 0
+  wasteBase: 0,
+  registeredStock: {
+    aji: 0,
+    saba: 0,
+    kamasu: 0,
+    isaki: 0,
+    surumeika: 0
+  },
+  salesData: {
+    aji: { soldQty: 0, revenue: 0 },
+    saba: { soldQty: 0, revenue: 0 },
+    kamasu: { soldQty: 0, revenue: 0 },
+    isaki: { soldQty: 0, revenue: 0 },
+    surumeika: { soldQty: 0, revenue: 0 }
+  }
 };
 
 let selectedFish = null;
@@ -588,6 +1179,7 @@ function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 function clone(o){ return JSON.parse(JSON.stringify(o)); }
 function pad2(n){ return String(n).padStart(2,"0"); }
 function fmtTime(mins){ return pad2(Math.floor(mins/60)) + ":" + pad2(mins%60); }
+function fmtPrice(n){ return Number(n || 0).toLocaleString(); }
 function fishIconSVG(color){
   color = color || "#1a3a55";
   return '<svg class="fish-icon" viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">'
@@ -629,17 +1221,11 @@ timeSlider.addEventListener("input", ()=>{
   $("#timeLabel").textContent = fmtTime(state.currentTime);
   renderListings();
   renderPriceSimulation();
+  if(state.mode === "owner" && state.ownerSub === "sales"){
+    renderSalesPanel();
+  }
 });
 $("#timeLabel").textContent = fmtTime(state.currentTime);
-
-$("#liveModeToggle").addEventListener("change", (e)=>{
-  state.aiMode = e.target.checked ? "live" : "demo";
-  $("#apiKeyInput").style.display = e.target.checked ? "inline-block" : "none";
-  $("#aiModeNote").textContent = e.target.checked
-    ? "ライブモード：Anthropic APIを呼び出します（つながらないときは自動でデモ表示）"
-    : "デモモード：あらかじめ用意した文章から生成演出をします";
-});
-$("#apiKeyInput").addEventListener("input", (e)=>{ state.apiKey = e.target.value; });
 
 /* =========================================================
    OWNER: subtabs
@@ -654,11 +1240,45 @@ $all(".subtab").forEach(btn=>{
 function renderOwnerSub(){
   $("#registerPanel").hidden = state.ownerSub !== "register";
   $("#reservationsPanel").hidden = state.ownerSub !== "reservations";
+  $("#salesPanel").hidden = state.ownerSub !== "sales";
+  if(state.ownerSub === "register"){
+    renderRegisteredStock();
+  }
   if(state.ownerSub === "reservations"){
     renderReservations();
     state.reservations.forEach(r=>r.seen = true);
     updateResBadge();
   }
+  if(state.ownerSub === "sales"){
+    renderSalesPanel();
+  }
+  renderSalesSummary();
+}
+
+/* =========================================================
+   OWNER: registered stock summary
+   ========================================================= */
+function renderRegisteredStock(){
+  const container = $("#registeredStockList");
+  if(!container) return;
+  container.innerHTML = "";
+  FISH_ORDER.forEach(key=>{
+    const fish = FISH_DATA[key];
+    const qty = state.registeredStock[key] || 0;
+    const card = document.createElement("div");
+    card.className = "registered-stock-card";
+    card.id = "stock-card-" + key;
+    card.innerHTML =
+      '<div class="registered-stock-name">'
+        + fishIconSVG("#1a3a55")
+        + '<span>' + fish.name + '</span>'
+      + '</div>'
+      + '<div class="registered-stock-val" id="stock-val-' + key + '">'
+        + qty
+        + ' <small class="unit-label">尾</small>'
+      + '</div>';
+    container.appendChild(card);
+  });
 }
 
 /* =========================================================
@@ -705,70 +1325,11 @@ function hideLoading(){
   if(ov) ov.remove();
 }
 
-async function callAnthropicAPI(fishType, apiKey){
-  const fishName = FISH_DATA[fishType].name;
-  const prompt = "あなたは商店街にある鮮魚店「魚太郎」の3代目店主です。今日入荷した「"+fishName+"」について、"
-    + "以下のJSON形式のみを出力してください。前置きや説明文は一切含めないでください。\n\n"
-    + '{"ownerComment":"産地・脂のり・目利きコメントを含む、生活感のある一言(80字前後)",'
-    + '"proposals":[{"title":"料理名","desc":"作り方の説明(60〜100字)","quick15":true},'
-    + '{"title":"料理名","desc":"説明","quick15":false},{"title":"料理名","desc":"説明","quick15":false}]}\n\n'
-    + "proposalsのうち1つは「平日夜15分・フライパンのみ」で作れる内容にし、quick15をtrueにしてください。";
-
-  const controller = new AbortController();
-  const timer = setTimeout(()=>controller.abort(), 7000);
-  let res;
-  try{
-    res = await fetch("https://api.anthropic.com/v1/messages", {
-      method:"POST",
-      headers:{
-        "content-type":"application/json",
-        "x-api-key": apiKey,
-        "anthropic-version":"2023-06-01",
-        "anthropic-dangerous-direct-browser-access":"true"
-      },
-      body: JSON.stringify({
-        model:"claude-sonnet-4-5-20250929",
-        max_tokens:700,
-        messages:[{role:"user", content:prompt}]
-      }),
-      signal: controller.signal
-    });
-  } finally {
-    clearTimeout(timer);
-  }
-  if(!res.ok) throw new Error("API error " + res.status);
-  const data = await res.json();
-  const text = (data.content && data.content[0] && data.content[0].text) || "";
-  const m = text.match(/\{[\s\S]*\}/);
-  if(!m) throw new Error("parse error");
-  const parsed = JSON.parse(m[0]);
-  if(!parsed.ownerComment || !Array.isArray(parsed.proposals)) throw new Error("shape error");
-  return {
-    ownerComment: parsed.ownerComment,
-    proposals: parsed.proposals,
-    prepOptions: FISH_DATA[fishType].prepOptions.slice()
-  };
-}
-
 async function generateListingContent(fishType){
   showLoading(pick(LOADING_MESSAGES));
-  if(state.aiMode === "live" && state.apiKey){
-    try{
-      const result = await callAnthropicAPI(fishType, state.apiKey);
-      hideLoading();
-      return { data: result, source:"live" };
-    }catch(err){
-      hideLoading();
-      showLoading(pick(LOADING_MESSAGES));
-      await sleep(500);
-      hideLoading();
-      return { data: clone(FISH_DATA[fishType]), source:"fallback" };
-    }
-  } else {
-    await sleep(800);
-    hideLoading();
-    return { data: clone(FISH_DATA[fishType]), source:"demo" };
-  }
+  await sleep(800);
+  hideLoading();
+  return clone(FISH_DATA[fishType]);
 }
 
 $("#generateBtn").addEventListener("click", async ()=>{
@@ -788,7 +1349,7 @@ $("#generateBtn").addEventListener("click", async ()=>{
 
   const btn = $("#generateBtn");
   btn.disabled = true;
-  const result = await generateListingContent(selectedFish);
+  const content = await generateListingContent(selectedFish);
   btn.disabled = false;
 
   draft = {
@@ -796,13 +1357,21 @@ $("#generateBtn").addEventListener("click", async ()=>{
     qty: qty,
     costPrice: Number($("#costInput").value) || 0,
     sellPrice: sellPrice,
-    ownerComment: result.data.ownerComment,
+    ownerComment: content.ownerComment,
     commentEdited: false,
-    proposals: clone(result.data.proposals),
-    prepOptions: result.data.prepOptions.slice(),
-    discount: { eveningPct: 20, closingPct: 40 },
-    pricing: clone(DEFAULT_PRICING),
-    fallback: result.source === "fallback"
+    proposals: clone(content.proposals),
+    prepOptions: content.prepOptions.slice(),
+    discount: {
+      eveningHour: 18,
+      eveningMin: 0,
+      eveningTime: 1080,
+      eveningPct: 20,
+      closingHour: 19,
+      closingMin: 0,
+      closingTime: 1140,
+      closingPct: 40
+    },
+    pricing: clone(DEFAULT_PRICING)
   };
   renderPreview();
 });
@@ -812,8 +1381,30 @@ function renderPreview(){
   const badge = $("#aiBadge");
   badge.textContent = "魚太郎AIが下書きしました";
   badge.classList.remove("edited");
-  $("#fallbackNote").hidden = !draft.fallback;
-  $("#fallbackNote").textContent = draft.fallback ? "（ネットワークの状況によりデモの文章を表示しています）" : "";
+
+  // 選択された魚種と数量・希望売価を表示
+  const fish = FISH_DATA[draft.fishType];
+  const fishName = fish ? fish.name : "";
+  const iconHost = $("#draftSelectionIcon");
+  if(iconHost) iconHost.innerHTML = fishIconSVG("#1a3a55");
+  const fishLabel = $("#draftSelectionFish");
+  if(fishLabel) fishLabel.textContent = "魚種: " + fishName;
+  const qtyLabel = $("#draftSelectionQty");
+  if(qtyLabel) qtyLabel.textContent = draft.qty;
+  const priceLabel = $("#draftSelectionPrice");
+  if(priceLabel) priceLabel.textContent = fmtPrice(draft.sellPrice);
+
+  // 選択された魚種と数量・希望売価を表示
+  const fish = FISH_DATA[draft.fishType];
+  const fishName = fish ? fish.name : "";
+  const iconHost = $("#draftSelectionIcon");
+  if(iconHost) iconHost.innerHTML = fishIconSVG("#1a3a55");
+  const fishLabel = $("#draftSelectionFish");
+  if(fishLabel) fishLabel.textContent = "魚種: " + fishName;
+  const qtyLabel = $("#draftSelectionQty");
+  if(qtyLabel) qtyLabel.textContent = draft.qty;
+  const priceLabel = $("#draftSelectionPrice");
+  if(priceLabel) priceLabel.textContent = fmtPrice(draft.sellPrice);
 
   const commentInput = $("#commentInput");
   commentInput.value = draft.ownerComment;
@@ -858,10 +1449,58 @@ function renderPreview(){
     prepBox.appendChild(label);
   });
 
-  $("#eveningPct").value = draft.discount.eveningPct;
-  $("#closingPct").value = draft.discount.closingPct;
-  $("#eveningPct").oninput = (e)=>{ draft.discount.eveningPct = Number(e.target.value)||0; renderPriceSimulation(); };
-  $("#closingPct").oninput = (e)=>{ draft.discount.closingPct = Number(e.target.value)||0; renderPriceSimulation(); };
+  /* 時刻・割引率フォームの初期化とバインド */
+  $("#eveningHour").value = draft.discount.eveningHour !== undefined ? draft.discount.eveningHour : 18;
+  $("#eveningMin").value = pad2(draft.discount.eveningMin !== undefined ? draft.discount.eveningMin : 0);
+  $("#eveningPct").value = draft.discount.eveningPct !== undefined ? draft.discount.eveningPct : 20;
+
+  $("#closingHour").value = draft.discount.closingHour !== undefined ? draft.discount.closingHour : 19;
+  $("#closingMin").value = pad2(draft.discount.closingMin !== undefined ? draft.discount.closingMin : 0);
+  $("#closingPct").value = draft.discount.closingPct !== undefined ? draft.discount.closingPct : 40;
+
+  function updateDiscountDraft(){
+    if(!draft) return;
+    const eh = Math.min(23, Math.max(0, Number($("#eveningHour").value) || 0));
+    const em = Math.min(59, Math.max(0, Number($("#eveningMin").value) || 0));
+    const ep = Math.min(100, Math.max(0, Number($("#eveningPct").value) || 0));
+
+    const ch = Math.min(23, Math.max(0, Number($("#closingHour").value) || 0));
+    const cm = Math.min(59, Math.max(0, Number($("#closingMin").value) || 0));
+    const cp = Math.min(100, Math.max(0, Number($("#closingPct").value) || 0));
+
+    draft.discount.eveningHour = eh;
+    draft.discount.eveningMin = em;
+    draft.discount.eveningTime = eh * 60 + em;
+    draft.discount.eveningPct = ep;
+
+    draft.discount.closingHour = ch;
+    draft.discount.closingMin = cm;
+    draft.discount.closingTime = ch * 60 + cm;
+    draft.discount.closingPct = cp;
+
+    const prevMin = draft.discount.eveningTime > OPEN_TIME ? draft.discount.eveningTime - 1 : OPEN_TIME;
+    $("#stage1Label").textContent = "定価期間（15:00〜" + fmtTime(prevMin) + "）";
+    $("#stage2Label").textContent = "値引き開始（" + fmtTime(draft.discount.eveningTime) + "〜）";
+    $("#stage3Label").textContent = "閉店直前セール（" + fmtTime(draft.discount.closingTime) + "〜）";
+
+    renderPriceSimulation();
+  }
+
+  $("#eveningHour").oninput = updateDiscountDraft;
+  $("#eveningMin").oninput = updateDiscountDraft;
+  $("#eveningMin").onblur = ()=>{
+    const em = Math.min(59, Math.max(0, Number($("#eveningMin").value) || 0));
+    $("#eveningMin").value = pad2(em);
+  };
+  $("#eveningPct").oninput = updateDiscountDraft;
+  $("#closingHour").oninput = updateDiscountDraft;
+  $("#closingMin").oninput = updateDiscountDraft;
+  $("#closingMin").onblur = ()=>{
+    const cm = Math.min(59, Math.max(0, Number($("#closingMin").value) || 0));
+    $("#closingMin").value = pad2(cm);
+  };
+  $("#closingPct").oninput = updateDiscountDraft;
+  updateDiscountDraft();
 
   renderPricingControls();
 }
@@ -872,6 +1511,18 @@ $("#publishBtn").addEventListener("click", ()=>{
     showToast("下処理オプションを1つ以上選択してください");
     return;
   }
+
+  // 加算処理: 魚種ごとの入荷登録数量に数量を加算
+  const addQty = Number(draft.qty) || 0;
+  if(state.registeredStock[draft.fishType] !== undefined){
+    state.registeredStock[draft.fishType] += addQty;
+  } else {
+    state.registeredStock[draft.fishType] = addQty;
+  }
+  renderRegisteredStock();
+  const valEl = $("#stock-val-" + draft.fishType);
+  if(valEl) bump(valEl);
+
   const listing = {
     id: "L" + (state.listingSeq++),
     fishType: draft.fishType,
@@ -882,14 +1533,15 @@ $("#publishBtn").addEventListener("click", ()=>{
     ownerComment: draft.ownerComment,
     proposals: draft.proposals,
     prepOptions: draft.prepOptions,
-    discount: draft.discount,
+    discount: clone(draft.discount),
     pricing: clone(draft.pricing),
     published: true
   };
   state.listings.push(listing);
   state.wasteBase += listing.qty;
   updateWasteBar();
-  showToast(FISH_DATA[listing.fishType].name + "を公開しました。客モードで確認できます。");
+  renderSalesSummary();
+  showToast(FISH_DATA[listing.fishType].name + "（" + addQty + "尾）を公開しました。客モードで確認できます。");
   resetRegisterForm();
 });
 
@@ -905,6 +1557,12 @@ function resetRegisterForm(){
   $("#uploadStatus").textContent = "";
   $("#uploadStatus").classList.remove("done");
   $("#photoUpload").value = "";
+  $("#eveningHour").value = 18;
+  $("#eveningMin").value = "00";
+  $("#eveningPct").value = 20;
+  $("#closingHour").value = 19;
+  $("#closingMin").value = "00";
+  $("#closingPct").value = 40;
   renderPriceSimulation();
 }
 
@@ -937,10 +1595,18 @@ function floorPrice(listing){
   return Math.min(listing.sellPrice, f);
 }
 
-/* --- 固定スケジュール方式（従来どおり） --- */
+/* --- 固定スケジュール方式 --- */
 function schedulePct(listing, t){
-  if(t >= CLOSING_HOUR_TIME) return listing.discount.closingPct;
-  if(t >= EVENING_TIME) return listing.discount.eveningPct;
+  const d = listing.discount || {
+    eveningTime: DEFAULT_EVENING_TIME,
+    closingTime: DEFAULT_CLOSING_TIME,
+    eveningPct: 20,
+    closingPct: 40
+  };
+  const evTime = d.eveningTime !== undefined ? d.eveningTime : DEFAULT_EVENING_TIME;
+  const clTime = d.closingTime !== undefined ? d.closingTime : DEFAULT_CLOSING_TIME;
+  if(t >= clTime) return d.closingPct;
+  if(t >= evTime) return d.eveningPct;
   return 0;
 }
 function schedulePrice(listing, t){
@@ -989,7 +1655,7 @@ function discountPct(listing, price){
   return Math.max(0, Math.round((1 - price/listing.sellPrice) * 100));
 }
 function priceLabel(at, price, pct){
-  return fmtTime(at) + "に¥" + price + "（" + pct + "%引き）";
+  return fmtTime(at) + "に¥" + fmtPrice(price) + "（" + pct + "%引き）";
 }
 /* ダイナミック時は段階変更がないため「30分後の見込み」を示す */
 function nextDropInfo(listing){
@@ -1004,19 +1670,27 @@ function nextDropInfo(listing){
     const next = priceAt(listing, at);
     const now = currentPrice(listing);
     if(next < now){
-      return { hasNext:true, at:at, label:fmtTime(at) + "ごろは¥" + next + "前後の見込みです" };
+      return { hasNext:true, at:at, label:fmtTime(at) + "ごろは¥" + fmtPrice(next) + "前後の見込みです" };
     }
     return { hasNext:false, at:at, label:"売れ行きが良いため、しばらくこの価格の見込みです" };
   }
   /* 値下げ幅が0の段階は予告せず、実際に価格が変わる次の段階を案内する */
   const now = currentPrice(listing);
-  const stages = [EVENING_TIME, CLOSING_HOUR_TIME].filter(at=>at > state.currentTime);
+  const d = listing.discount || {
+    eveningTime: DEFAULT_EVENING_TIME,
+    closingTime: DEFAULT_CLOSING_TIME,
+    eveningPct: 20,
+    closingPct: 40
+  };
+  const evTime = d.eveningTime !== undefined ? d.eveningTime : DEFAULT_EVENING_TIME;
+  const clTime = d.closingTime !== undefined ? d.closingTime : DEFAULT_CLOSING_TIME;
+  const stages = [evTime, clTime].filter(at=>at > state.currentTime).sort((a,b)=>a-b);
   for(const at of stages){
     if(schedulePrice(listing, at) < now){
       return { hasNext:true, at:at, label:dropLabel(listing, at) };
     }
   }
-  if(state.currentTime < CLOSING_HOUR_TIME){
+  if(state.currentTime < clTime){
     return { hasNext:false, at:null, label:schedulePct(listing, state.currentTime) === 0
       ? "本日は定価で販売します"
       : "本日はこの価格で販売します" };
@@ -1228,58 +1902,73 @@ function buildPickupOptions(){
 function renderListings(){
   updateWasteBar();
   const grid = $("#listingsGrid");
+  const reserveBar = $("#customerReserveActionBar");
   grid.innerHTML = "";
 
   if(state.listings.length === 0){
     grid.innerHTML = '<div class="empty-note">本日の入荷はこれから登録します（店主モードで登録できます）</div>';
+    if(reserveBar) reserveBar.style.display = "none";
     return;
   }
 
+  // 魚種ごとにグルーピング
+  const grouped = {};
+  const groupOrder = [];
   state.listings.forEach(listing=>{
-    const fish = FISH_DATA[listing.fishType];
+    if(!grouped[listing.fishType]){
+      grouped[listing.fishType] = [];
+      groupOrder.push(listing.fishType);
+    }
+    grouped[listing.fishType].push(listing);
+  });
+
+  let anyAvailable = false;
+
+  groupOrder.forEach(fishType=>{
+    const list = grouped[fishType];
+    const fish = FISH_DATA[fishType];
     const card = document.createElement("div");
     card.className = "card";
 
-    const price = currentPrice(listing);
-    const pct = currentPct(listing);
-    const drop = nextDropInfo(listing);
-    const soldOut = listing.remainingQty <= 0;
+    const totalRemaining = list.reduce((sum, l)=>sum + (l.remainingQty || 0), 0);
+    const allSoldOut = totalRemaining <= 0;
+    if(!allSoldOut) anyAvailable = true;
 
-    let priceHtml;
-    if(soldOut){
-      priceHtml = '<div class="sold-out">本日分は完売しました</div>';
+    // 価格帯の計算（最低価格〜最高価格）
+    const prices = list.map(l=>currentPrice(l));
+    const minPrice = Math.min(...prices);
+    const maxPrice = Math.max(...prices);
+    const priceText = minPrice === maxPrice
+      ? "¥" + fmtPrice(minPrice)
+      : "¥" + fmtPrice(minPrice) + "～¥" + fmtPrice(maxPrice);
+
+    const latestListing = list[list.length - 1];
+
+    let priceSummaryHtml;
+    if(allSoldOut){
+      priceSummaryHtml = '<div class="sold-out">本日分は完売しました</div>';
     } else {
-      const reason = priceReason(listing);
-      priceHtml = '<div class="price-row">'
-        + '<span class="price-now">¥' + price + '</span>'
-        + (pct > 0 ? '<span class="price-orig">¥' + listing.sellPrice + '</span><span class="price-tag">' + pct + '%引き</span>' : '')
-        + (reason ? '<span class="price-reason ' + reason.cls + '">' + reason.text + '</span>' : '')
-        + '</div>'
-        + (isDynamic(listing)
-            ? '<div class="spark-row">' + sparklineSVG(listing) + '<span class="spark-note">値動きの予測（売れ行きにより変わります）</span></div>'
+      priceSummaryHtml = '<div class="price-row">'
+        + '<span class="price-now">' + priceText + '</span>'
+        + (list.length === 1 && currentPct(latestListing) > 0
+            ? '<span class="price-orig">¥' + fmtPrice(latestListing.sellPrice) + '</span><span class="price-tag">' + currentPct(latestListing) + '%引き</span>'
             : '')
-        + '<div class="countdown">' + drop.label + '</div>'
-        + '<div class="forecast-note">' + forecastNote(listing) + '</div>';
+        + '</div>'
+        + '<div class="forecast-note">' + forecastNote(latestListing) + '</div>';
     }
 
     card.innerHTML =
       '<div class="card-photo">' + fishIconSVG("#1a3a55") + '</div>'
       + '<div class="card-body">'
-        + '<div class="card-title"><h3>' + fish.name + '</h3><span class="card-qty">残り ' + listing.remainingQty + ' 尾</span></div>'
-        + '<div class="card-comment">' + escapeHtml(listing.ownerComment) + '</div>'
-        + priceHtml
+        + '<div class="card-title"><h3>' + fish.name + '</h3><span class="card-qty">合計残り ' + totalRemaining + ' 尾</span></div>'
+        + '<div class="card-comment">' + escapeHtml(latestListing.ownerComment) + '</div>'
+        + priceSummaryHtml
         + '<details class="proposals-acc"><summary>調理提案を見る（3案）</summary><div class="proposals-body"></div></details>'
-        + (soldOut ? '' :
-          '<div class="field prep-radio-wrap"><label>下処理</label><div class="prep-radio-group"></div></div>'
-          + '<div class="field qty-field"><label>数量</label><div class="qty-select"><select class="qty-input"></select>'
-            + '<span class="qty-left">残り ' + listing.remainingQty + ' 尾まで</span></div></div>'
-          + '<div class="field pickup-select"><label>受け取り希望時間</label><select></select></div>'
-          + '<div class="card-footer"><button type="button" class="btn btn-primary btn-full reserve-btn">取り置きする</button></div>'
-        )
+        + (allSoldOut ? '' : '<div class="price-variants-grid"></div>')
       + '</div>';
 
     const propBody = card.querySelector(".proposals-body");
-    listing.proposals.forEach(p=>{
+    latestListing.proposals.forEach(p=>{
       const d = document.createElement("div");
       d.className = "proposal-view";
       d.innerHTML = '<strong>' + escapeHtml(p.title) + '</strong>'
@@ -1288,50 +1977,148 @@ function renderListings(){
       propBody.appendChild(d);
     });
 
-    if(!soldOut){
-      const prepGroup = card.querySelector(".prep-radio-group");
-      listing.prepOptions.forEach((opt, i)=>{
-        const label = document.createElement("label");
-        const inputName = "prep-" + listing.id;
-        label.innerHTML = '<input type="radio" name="' + inputName + '" value="' + opt + '" ' + (i===0?"checked":"") + '> ' + opt;
-        prepGroup.appendChild(label);
-      });
+    if(!allSoldOut){
+      const variantsGrid = card.querySelector(".price-variants-grid");
 
-      const qtySelect = card.querySelector(".qty-input");
-      for(let i = 1; i <= listing.remainingQty; i++){
-        const o = document.createElement("option");
-        o.value = i;
-        o.textContent = i + " 尾";
-        qtySelect.appendChild(o);
-      }
+      list.forEach(listing=>{
+        const price = currentPrice(listing);
+        const pct = currentPct(listing);
+        const drop = nextDropInfo(listing);
+        const itemSoldOut = listing.remainingQty <= 0;
+        const box = document.createElement("div");
+        box.className = "price-variant-box" + (itemSoldOut ? " sold-out-box" : "");
+        box.dataset.listingId = listing.id;
 
-      const select = card.querySelector(".pickup-select select");
-      const pickupOpts = buildPickupOptions();
-      if(pickupOpts.length === 0){
-        select.innerHTML = '<option value="">本日の受け取り枠は締め切りました</option>';
-        select.disabled = true;
-        card.querySelector(".reserve-btn").disabled = true;
-      } else {
-        pickupOpts.forEach(t=>{
-          const o = document.createElement("option");
-          o.value = t;
-          o.textContent = fmtTime(t);
-          select.appendChild(o);
-        });
-      }
+        const reason = priceReason(listing);
 
-      card.querySelector(".reserve-btn").addEventListener("click", ()=>{
-        const prepChoice = card.querySelector('input[name="prep-' + listing.id + '"]:checked');
-        const pickupVal = select.value;
-        const qty = Number(qtySelect.value) || 1;
-        if(!prepChoice){ showToast("下処理を選択してください"); return; }
-        if(!pickupVal){ showToast("受け取り希望時間を選択してください"); return; }
-        if(qty > listing.remainingQty){ showToast("残りの数量までで選択してください"); return; }
-        openReserveModal(listing, prepChoice.value, Number(pickupVal), qty);
+        box.innerHTML =
+          '<div class="price-variant-header">'
+            + '<div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">'
+              + '<span class="price-variant-price">¥' + fmtPrice(price) + '</span>'
+              + (pct > 0 ? '<span class="price-variant-orig">¥' + fmtPrice(listing.sellPrice) + '</span><span class="price-variant-tag">' + pct + '%引き</span>' : '')
+            + '</div>'
+            + '<span class="card-qty">' + (itemSoldOut ? '完売' : '残り ' + listing.remainingQty + ' 尾') + '</span>'
+          + '</div>'
+          + (reason ? '<div><span class="price-reason ' + reason.cls + '">' + reason.text + '</span></div>' : '')
+          + (isDynamic(listing)
+              ? '<div class="spark-row">' + sparklineSVG(listing) + '</div>'
+              : '')
+          + '<div class="countdown" style="font-size:11.5px;">' + drop.label + '</div>'
+          + (itemSoldOut ? '<div class="sold-out">この価格帯は完売しました</div>' :
+            '<div class="field prep-radio-wrap" style="margin-bottom:8px;"><label>下処理</label><div class="prep-radio-group"></div></div>'
+            + '<div class="field qty-field" style="margin-bottom:8px;"><label>数量</label><div class="qty-select"><select class="qty-input"></select>'
+              + '<span class="qty-left">残り ' + listing.remainingQty + ' 尾まで</span></div></div>'
+          );
+
+        if(!itemSoldOut){
+          const prepGroup = box.querySelector(".prep-radio-group");
+          listing.prepOptions.forEach((opt, i)=>{
+            const label = document.createElement("label");
+            const inputName = "prep-" + listing.id;
+            label.innerHTML = '<input type="radio" name="' + inputName + '" value="' + opt + '" ' + (i===0?"checked":"") + '> ' + opt;
+            prepGroup.appendChild(label);
+          });
+
+          const qtySelect = box.querySelector(".qty-input");
+          // デフォルトは0尾 (value=0)
+          const zeroOpt = document.createElement("option");
+          zeroOpt.value = 0;
+          zeroOpt.textContent = "0 尾";
+          zeroOpt.selected = true;
+          qtySelect.appendChild(zeroOpt);
+
+          for(let i = 1; i <= listing.remainingQty; i++){
+            const o = document.createElement("option");
+            o.value = i;
+            o.textContent = i + " 尾";
+            qtySelect.appendChild(o);
+          }
+        }
+
+        variantsGrid.appendChild(box);
       });
     }
 
     grid.appendChild(card);
+  });
+
+  // 全体取り置きバーの更新
+  if(reserveBar){
+    if(!anyAvailable){
+      reserveBar.style.display = "none";
+    } else {
+      reserveBar.style.display = "block";
+      const pickupSelect = $("#bulkPickupSelect");
+      const pickupOpts = buildPickupOptions();
+      const currentSelected = pickupSelect.value;
+      pickupSelect.innerHTML = "";
+
+      if(pickupOpts.length === 0){
+        pickupSelect.innerHTML = '<option value="">本日の受け取り枠は締め切りました</option>';
+        pickupSelect.disabled = true;
+        $("#bulkReserveBtn").disabled = true;
+      } else {
+        pickupSelect.disabled = false;
+        $("#bulkReserveBtn").disabled = false;
+        pickupOpts.forEach(t=>{
+          const o = document.createElement("option");
+          o.value = t;
+          o.textContent = fmtTime(t);
+          if(String(t) === currentSelected) o.selected = true;
+          pickupSelect.appendChild(o);
+        });
+      }
+    }
+  }
+}
+
+// 取り置きするボタン（listingsGridのすぐ下）
+const bulkReserveBtn = $("#bulkReserveBtn");
+if(bulkReserveBtn){
+  bulkReserveBtn.addEventListener("click", ()=>{
+    const selectedItems = [];
+    const boxes = $all("#listingsGrid .price-variant-box");
+    boxes.forEach(box=>{
+      const listingId = box.dataset.listingId;
+      const listing = state.listings.find(l=>l.id === listingId);
+      if(!listing || listing.remainingQty <= 0) return;
+      const qtySelect = box.querySelector(".qty-input");
+      const qty = Number(qtySelect ? qtySelect.value : 0) || 0;
+      if(qty > 0){
+        const prepRadio = box.querySelector('input[name="prep-' + listing.id + '"]:checked');
+        const prepChoice = prepRadio ? prepRadio.value : (listing.prepOptions[0] || "そのまま");
+        const price = currentPrice(listing);
+        selectedItems.push({
+          listing: listing,
+          prepChoice: prepChoice,
+          qty: qty,
+          price: price,
+          total: price * qty
+        });
+      }
+    });
+
+    if(selectedItems.length === 0){
+      showToast("取り置きする魚の数量を1尾以上選択してください");
+      return;
+    }
+
+    const pickupSelect = $("#bulkPickupSelect");
+    const pickupVal = pickupSelect.value;
+    if(!pickupVal){
+      showToast("受け取り希望時間を選択してください");
+      return;
+    }
+    const pickupTime = Number(pickupVal);
+
+    for(const item of selectedItems){
+      if(item.qty > item.listing.remainingQty){
+        showToast(FISH_DATA[item.listing.fishType].name + "の数量が残数を超えています");
+        return;
+      }
+    }
+
+    openBulkReserveModal(selectedItems, pickupTime);
   });
 }
 
@@ -1340,24 +2127,40 @@ function escapeHtml(s){
 }
 
 /* =========================================================
-   RESERVATION MODAL
+   RESERVATION MODAL (一括取り置き対応)
    ========================================================= */
-function openReserveModal(listing, prepChoice, pickupTime, qty){
-  const fish = FISH_DATA[listing.fishType];
-  const price = currentPrice(listing);
-  const total = price * qty;
+function openBulkReserveModal(selectedItems, pickupTime){
+  const grandTotal = selectedItems.reduce((sum, item)=>sum + item.total, 0);
+  const totalQty = selectedItems.reduce((sum, item)=>sum + item.qty, 0);
+  const hasDynamic = selectedItems.some(item=>isDynamic(item.listing));
+
+  let itemsHtml = '<div class="modal-items-list">';
+  selectedItems.forEach(item=>{
+    const fish = FISH_DATA[item.listing.fishType];
+    itemsHtml +=
+      '<div class="modal-item-row">'
+        + '<div class="modal-item-left">'
+          + '<span class="modal-item-name">' + fish.name + '</span>'
+          + '<span class="modal-item-prep">下処理: ' + item.prepChoice + '</span>'
+        + '</div>'
+        + '<div class="modal-item-right">'
+          + '<div class="modal-item-subtotal">¥' + fmtPrice(item.total) + '</div>'
+          + '<div class="modal-item-qty">¥' + fmtPrice(item.price) + ' × ' + item.qty + '尾</div>'
+        + '</div>'
+      + '</div>';
+  });
+  itemsHtml += '</div>';
+
   const root = $("#modalRoot");
   root.innerHTML =
     '<div class="modal-overlay" id="modalOverlay">'
-      + '<div class="modal-box">'
+      + '<div class="modal-box" style="max-width:460px;">'
         + '<h3>この内容で取り置きしますか？</h3>'
-        + '<div class="modal-line"><span>魚種</span><span>' + fish.name + '</span></div>'
-        + '<div class="modal-line"><span>下処理</span><span>' + prepChoice + 'にしておきます</span></div>'
+        + itemsHtml
         + '<div class="modal-line"><span>受け取り時刻</span><span>' + fmtTime(pickupTime) + '</span></div>'
-        + '<div class="modal-line"><span>数量</span><span>' + qty + ' 尾</span></div>'
-        + '<div class="modal-line"><span>現在価格</span><span>¥' + price + ' × ' + qty + ' 尾</span></div>'
-        + '<div class="modal-line"><span>お支払い予定</span><span class="total">¥' + total + '</span></div>'
-        + '<div class="lock-note">' + (isDynamic(listing)
+        + '<div class="modal-line"><span>合計数量</span><span>' + totalQty + ' 尾</span></div>'
+        + '<div class="modal-line"><span>お支払い予定</span><span class="total">¥' + fmtPrice(grandTotal) + '</span></div>'
+        + '<div class="lock-note">' + (hasDynamic
             ? 'この価格で確保されます。以降の価格の動きにかかわらず、この金額のままお渡しします。この先の価格は売れ行きによって変わる予測のため、確実に受け取るには、お早めのご予約がおすすめです。'
             : 'この価格で確保されます（以降の値下がりにかかわらず、この金額のままお渡しします）。売り切れの場合もあるため、確実に受け取るには、お早めのご予約がおすすめです。') + '</div>'
         + '<div class="modal-actions">'
@@ -1369,51 +2172,79 @@ function openReserveModal(listing, prepChoice, pickupTime, qty){
 
   $("#modalCancel").addEventListener("click", closeModal);
   $("#modalConfirm").addEventListener("click", ()=>{
-    confirmReservation(listing, prepChoice, pickupTime, price, qty);
+    confirmBulkReservation(selectedItems, pickupTime);
   });
 }
 
-function confirmReservation(listing, prepChoice, pickupTime, price, qty){
-  const takeQty = Math.max(1, Math.min(qty, listing.remainingQty));
-  const fish = FISH_DATA[listing.fishType];
-  const reservation = {
-    id: "R" + (state.reservationSeq),
-    number: "#" + String(state.reservationSeq).padStart(4,"0"),
-    fishType: listing.fishType,
-    prepChoice: prepChoice,
-    pickupTime: pickupTime,
-    qty: takeQty,
-    lockedPrice: price,
-    lockedTotal: price * takeQty,
-    customerName: pick(CUSTOMER_NAMES),
-    status: "pending",
-    seen: false
-  };
-  state.reservationSeq++;
-  state.reservations.push(reservation);
-  listing.remainingQty = Math.max(0, listing.remainingQty - takeQty);
+function confirmBulkReservation(selectedItems, pickupTime){
+  const createdReservations = [];
+  const sharedCustomerName = pick(CUSTOMER_NAMES);
+  selectedItems.forEach(item=>{
+    const takeQty = Math.max(1, Math.min(item.qty, item.listing.remainingQty));
+    const fish = FISH_DATA[item.listing.fishType];
+    const reservation = {
+      id: "R" + (state.reservationSeq),
+      number: "#" + String(state.reservationSeq).padStart(4,"0"),
+      fishType: item.listing.fishType,
+      costPrice: item.listing.costPrice,
+      prepChoice: item.prepChoice,
+      pickupTime: pickupTime,
+      qty: takeQty,
+      remainingQty: takeQty,
+      lockedPrice: item.price,
+      lockedTotal: item.price * takeQty,
+      customerName: sharedCustomerName,
+      status: "pending",
+      seen: false
+    };
+    state.reservationSeq++;
+    state.reservations.push(reservation);
+    item.listing.remainingQty = Math.max(0, item.listing.remainingQty - takeQty);
+    createdReservations.push({ reservation, fish, takeQty });
+  });
 
   if(state.mode === "owner" && state.ownerSub === "reservations"){
     renderReservations();
-    reservation.seen = true;
+    createdReservations.forEach(c=>c.reservation.seen = true);
     updateResBadge();
   } else {
     updateResBadge();
   }
 
   updateWasteBar();
+  renderRegisteredStock();
+  renderSalesPanel();
+  renderSalesSummary();
+
+  const grandTotal = createdReservations.reduce((sum, c)=>sum + c.reservation.lockedTotal, 0);
+  const totalQty = createdReservations.reduce((sum, c)=>sum + c.takeQty, 0);
+
+  let doneItemsHtml = '<div class="modal-done-list">';
+  createdReservations.forEach(c=>{
+    doneItemsHtml +=
+      '<div class="modal-done-item">'
+        + '<span><strong>' + c.fish.name + '</strong> (' + c.reservation.prepChoice + ') ' + c.takeQty + '尾</span>'
+        + '<span style="font-weight:700;color:var(--accent-dark);">¥' + fmtPrice(c.reservation.lockedTotal) + ' (' + c.reservation.number + ')</span>'
+      + '</div>';
+  });
+  doneItemsHtml += '</div>';
 
   const root = $("#modalRoot");
   root.innerHTML =
     '<div class="modal-overlay" id="modalOverlay">'
-      + '<div class="modal-box done-view">'
+      + '<div class="modal-box done-view" style="max-width:460px;">'
         + '<div class="done-msg">取り置きが完了しました</div>'
-        + '<div class="res-number">' + reservation.number + '</div>'
-        + '<div class="done-sub">' + fish.name + ' ' + takeQty + '尾・¥' + reservation.lockedTotal + '</div>'
+        + (createdReservations.length === 1
+            ? '<div class="res-number">' + createdReservations[0].reservation.number + '</div>'
+            : '<div class="res-number" style="font-size:26px;">' + createdReservations.length + '件の予約完了</div>'
+          )
+        + doneItemsHtml
+        + '<div class="done-sub" style="margin-bottom:6px;">合計: ' + totalQty + '尾・¥' + fmtPrice(grandTotal) + '</div>'
         + '<div class="done-sub">' + fmtTime(pickupTime) + 'に魚太郎でお待ちしています</div>'
         + '<button type="button" class="btn btn-primary btn-full" id="modalClose">閉じる</button>'
       + '</div>'
     + '</div>';
+
   $("#modalClose").addEventListener("click", ()=>{
     closeModal();
     renderListings();
@@ -1452,6 +2283,7 @@ function renderReservations(){
       '<div class="res-time">' + fmtTime(r.pickupTime) + '</div>'
       + '<div class="res-name">' + r.customerName + '</div>'
       + '<div class="res-fish">' + fish.name + '</div>'
+      + '<div class="res-price">¥' + fmtPrice(r.lockedPrice) + '</div>'
       + '<div class="res-qty">' + (r.qty || 1) + ' 尾</div>'
       + '<div class="res-prep">' + r.prepChoice + '</div>'
       + '<div class="res-num">' + r.number + '</div>'
@@ -1467,9 +2299,276 @@ function renderReservations(){
 }
 
 /* =========================================================
+   OWNER: sales summary & sales registration
+   ========================================================= */
+function renderSalesSummary(){
+  const tbody = $("#salesSummaryTbody");
+  const tfoot = $("#salesSummaryTfoot");
+  if(!tbody || !tfoot) return;
+  tbody.innerHTML = "";
+
+  let totalRegisteredQty = 0;
+  let totalSoldQty = 0;
+  let totalRevenue = 0;
+  let totalCost = 0;
+  let totalProfit = 0;
+
+  FISH_ORDER.forEach(key=>{
+    const fish = FISH_DATA[key];
+    const registeredQty = (state.registeredStock && state.registeredStock[key]) || 0;
+    const soldQty = (state.salesData && state.salesData[key] && state.salesData[key].soldQty) || 0;
+    const revenue = (state.salesData && state.salesData[key] && state.salesData[key].revenue) || 0;
+    
+    // 仕入価格合計: 「入荷登録」で登録した、魚種ごとの「仕入れ値」×「数量」の合計
+    const costTotal = state.listings
+      .filter(l => l.fishType === key)
+      .reduce((sum, l) => sum + ((Number(l.costPrice) || 0) * (Number(l.qty) || 0)), 0);
+    
+    // 粗利: 「売上高」 - 「仕入価格合計」
+    const profit = revenue - costTotal;
+
+    totalRegisteredQty += registeredQty;
+    totalSoldQty += soldQty;
+    totalRevenue += revenue;
+    totalCost += costTotal;
+    totalProfit += profit;
+
+    const tr = document.createElement("tr");
+    const profitClass = profit > 0 ? "profit-pos" : (profit < 0 ? "profit-neg" : "");
+    const profitSign = profit < 0 ? "-¥" + fmtPrice(Math.abs(profit)) : "¥" + fmtPrice(profit);
+
+    tr.innerHTML =
+      '<td>' + fish.name + '</td>'
+      + '<td>' + registeredQty + ' 尾</td>'
+      + '<td>' + soldQty + ' 尾</td>'
+      + '<td class="money">¥' + fmtPrice(revenue) + '</td>'
+      + '<td class="money">¥' + fmtPrice(costTotal) + '</td>'
+      + '<td class="money ' + profitClass + '">' + profitSign + '</td>';
+    tbody.appendChild(tr);
+  });
+
+  const totalProfitClass = totalProfit > 0 ? "profit-pos" : (totalProfit < 0 ? "profit-neg" : "");
+  const totalProfitSign = totalProfit < 0 ? "-¥" + fmtPrice(Math.abs(totalProfit)) : "¥" + fmtPrice(totalProfit);
+
+  tfoot.innerHTML =
+    '<tr>'
+      + '<td>合計</td>'
+      + '<td>' + totalRegisteredQty + ' 尾</td>'
+      + '<td>' + totalSoldQty + ' 尾</td>'
+      + '<td class="money">¥' + fmtPrice(totalRevenue) + '</td>'
+      + '<td class="money">¥' + fmtPrice(totalCost) + '</td>'
+      + '<td class="money ' + totalProfitClass + '">' + totalProfitSign + '</td>'
+    + '</tr>';
+}
+
+function renderSalesPanel(){
+  const grid = $("#salesListingsGrid");
+  const emptyNote = $("#salesListingsEmpty");
+  const actionRow = $("#salesActionRow");
+  if(!grid) return;
+  grid.innerHTML = "";
+
+  const hasListings = state.listings && state.listings.length > 0;
+  const hasReservations = state.reservations && state.reservations.length > 0;
+
+  if(!hasListings && !hasReservations){
+    if(emptyNote) emptyNote.hidden = false;
+    if(actionRow) actionRow.hidden = true;
+    return;
+  }
+  if(emptyNote) emptyNote.hidden = true;
+  if(actionRow) actionRow.hidden = false;
+
+  // 1. 通常出品（店頭分）
+  state.listings.forEach(listing=>{
+    const fish = FISH_DATA[listing.fishType];
+    const unitSellPrice = currentPrice(listing);
+    const card = document.createElement("div");
+    card.className = "sales-item-card";
+    card.dataset.listingId = listing.id;
+
+    card.innerHTML =
+      '<div class="sales-item-header">'
+        + '<div class="sales-item-fish">'
+          + fishIconSVG("#1a3a55")
+          + '<span>' + fish.name + '</span>'
+        + '</div>'
+        + '<span class="price-badge" style="font-size:11.5px;font-weight:700;background:var(--indigo-100);color:var(--indigo-900);padding:3px 8px;border-radius:6px;">'
+          + (isDynamic(listing) ? "変動価格" : "時間値下げ")
+        + '</span>'
+      + '</div>'
+      + '<div class="sales-item-details">'
+        + '<div class="item-stat">'
+          + '<span class="label">仕入れ値</span>'
+          + '<span class="val">¥' + fmtPrice(listing.costPrice) + ' / 尾</span>'
+        + '</div>'
+        + '<div class="item-stat">'
+          + '<span class="label">希望売価</span>'
+          + '<span class="val highlight">¥' + fmtPrice(listing.sellPrice) + ' / 尾</span>'
+        + '</div>'
+        + '<div class="item-stat">'
+          + '<span class="label">現在売価単価</span>'
+          + '<span class="val">¥' + fmtPrice(unitSellPrice) + ' / 尾</span>'
+        + '</div>'
+        + '<div class="item-stat">'
+          + '<span class="label">残り数量</span>'
+          + '<span class="val">' + listing.remainingQty + ' 尾 / ' + listing.qty + ' 尾</span>'
+        + '</div>'
+      + '</div>'
+      + '<div class="sales-item-input-row">'
+        + '<label for="sales-qty-' + listing.id + '">売上数量</label>'
+        + '<div class="sales-input-group">'
+          + '<input type="number" id="sales-qty-' + listing.id + '" class="sales-qty-input" min="0" max="' + listing.remainingQty + '" value="0" ' + (listing.remainingQty <= 0 ? 'disabled' : '') + '>'
+          + '<span style="font-size:13px;font-weight:600;">尾</span>'
+        + '</div>'
+      + '</div>';
+    grid.appendChild(card);
+  });
+
+  // 2. 取り置き分（予約一覧連動・時間値下げ対象外）
+  state.reservations.forEach(res=>{
+    const fish = FISH_DATA[res.fishType];
+    const unitSellPrice = res.lockedPrice; // 時間値下げ対象外
+    const remQty = res.remainingQty !== undefined ? res.remainingQty : res.qty;
+    const card = document.createElement("div");
+    card.className = "sales-item-card reservation-card";
+    card.dataset.reservationId = res.id;
+
+    card.innerHTML =
+      '<div class="sales-item-header">'
+        + '<div class="sales-item-fish">'
+          + fishIconSVG("#1a3a55")
+          + '<span>' + fish.name + ' <small style="font-size:12px;font-weight:normal;color:var(--muted);">（取り置き分）</small></span>'
+        + '</div>'
+        + '<span class="price-badge" style="font-size:11.5px;font-weight:700;background:var(--accent);color:#fff;padding:3px 8px;border-radius:6px;">'
+          + res.customerName + '様 ' + res.number
+        + '</span>'
+      + '</div>'
+      + '<div class="sales-item-details">'
+        + '<div class="item-stat">'
+          + '<span class="label">仕入れ値</span>'
+          + '<span class="val">¥' + fmtPrice(res.costPrice || 0) + ' / 尾</span>'
+        + '</div>'
+        + '<div class="item-stat">'
+          + '<span class="label">希望売価</span>'
+          + '<span class="val highlight">¥' + fmtPrice(res.lockedPrice) + ' / 尾</span>'
+        + '</div>'
+        + '<div class="item-stat">'
+          + '<span class="label">売価単価 (値下げ対象外)</span>'
+          + '<span class="val highlight">¥' + fmtPrice(unitSellPrice) + ' / 尾</span>'
+        + '</div>'
+        + '<div class="item-stat">'
+          + '<span class="label">数量</span>'
+          + '<span class="val">' + remQty + ' 尾 / ' + res.qty + ' 尾</span>'
+        + '</div>'
+      + '</div>'
+      + '<div class="sales-item-input-row">'
+        + '<label for="sales-res-qty-' + res.id + '">売上数量</label>'
+        + '<div class="sales-input-group">'
+          + '<input type="number" id="sales-res-qty-' + res.id + '" class="sales-qty-input" min="0" max="' + remQty + '" value="' + (remQty > 0 ? remQty : 0) + '" ' + (remQty <= 0 ? 'disabled' : '') + '>'
+          + '<span style="font-size:13px;font-weight:600;">尾</span>'
+        + '</div>'
+      + '</div>';
+    grid.appendChild(card);
+  });
+}
+
+const recordSalesBtn = $("#recordSalesBtn");
+if(recordSalesBtn){
+  recordSalesBtn.addEventListener("click", ()=>{
+    const inputs = $all("#salesListingsGrid .sales-qty-input");
+    let recordedAny = false;
+    let totalAddedQty = 0;
+    let totalAddedRevenue = 0;
+
+    for(const input of inputs){
+      const card = input.closest(".sales-item-card");
+      if(!card) continue;
+      const listingId = card.dataset.listingId;
+      const reservationId = card.dataset.reservationId;
+      const qty = Number(input.value) || 0;
+      if(qty <= 0) continue;
+
+      if(listingId){
+        const listing = state.listings.find(l=>l.id === listingId);
+        if(!listing) continue;
+
+        if(qty > listing.remainingQty){
+          showToast(FISH_DATA[listing.fishType].name + "の入力数量が残り数量（" + listing.remainingQty + "尾）を超えています");
+          return;
+        }
+
+        const unitPrice = currentPrice(listing);
+        const subtotal = unitPrice * qty;
+
+        if(!state.salesData[listing.fishType]){
+          state.salesData[listing.fishType] = { soldQty: 0, revenue: 0 };
+        }
+        state.salesData[listing.fishType].soldQty += qty;
+        state.salesData[listing.fishType].revenue += subtotal;
+        listing.remainingQty = Math.max(0, listing.remainingQty - qty);
+
+        recordedAny = true;
+        totalAddedQty += qty;
+        totalAddedRevenue += subtotal;
+      } else if(reservationId){
+        const res = state.reservations.find(r=>r.id === reservationId);
+        if(!res) continue;
+
+        const remQty = res.remainingQty !== undefined ? res.remainingQty : res.qty;
+        if(qty > remQty){
+          showToast(FISH_DATA[res.fishType].name + "（取り置き分）の入力数量が残り数量（" + remQty + "尾）を超えています");
+          return;
+        }
+
+        // 希望売価（時間値下げ対象外）で計算
+        const unitPrice = res.lockedPrice;
+        const subtotal = unitPrice * qty;
+
+        if(!state.salesData[res.fishType]){
+          state.salesData[res.fishType] = { soldQty: 0, revenue: 0 };
+        }
+        state.salesData[res.fishType].soldQty += qty;
+        state.salesData[res.fishType].revenue += subtotal;
+        res.remainingQty = Math.max(0, remQty - qty);
+
+        recordedAny = true;
+        totalAddedQty += qty;
+        totalAddedRevenue += subtotal;
+      }
+    }
+
+    if(!recordedAny){
+      showToast("売上を登録する魚の数量を1尾以上入力してください");
+      return;
+    }
+
+    showToast("売上を登録しました（" + totalAddedQty + "尾・¥" + fmtPrice(totalAddedRevenue) + "）");
+    renderSalesPanel();
+    renderSalesSummary();
+    renderRegisteredStock();
+    renderListings();
+    updateWasteBar();
+  });
+}
+
+/* =========================================================
    INIT
    ========================================================= */
+// ヘッダーの実測高を CSS 変数に反映（廃棄予定バーの sticky 位置に使用）
+(function(){
+  const headerEl = document.querySelector("header.topbar");
+  const syncHeaderHeight = ()=>{
+    document.documentElement.style.setProperty("--header-h", headerEl.offsetHeight + "px");
+  };
+  syncHeaderHeight();
+  if(window.ResizeObserver) new ResizeObserver(syncHeaderHeight).observe(headerEl);
+  window.addEventListener("resize", syncHeaderHeight);
+})();
+
 updateWasteBar();
+renderRegisteredStock();
+renderSalesSummary();
 renderOwnerSub();
 renderListings();
 
